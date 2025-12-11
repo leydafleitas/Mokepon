@@ -5,6 +5,12 @@ let vidasJugador = 3
 let vidasEnemigo = 3
 
 function seleccionarMascotaJugador() {
+    let sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
+    sectionSeleccionarMascota.style.display = 'none'
+
+    let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
+    sectionSeleccionarAtaque.style.display = 'block'
+
     let seleccion;
     if(document.getElementById('Hipodoge').checked == true){
         seleccion = 'HIPODOGE';
@@ -79,6 +85,8 @@ function ataqueAleatorioEnemigo(){
 function revisarVidas(){
     if(vidasEnemigo == 0 || vidasJugador == 0){
         finalizarJuego()
+        let sectionReiniciar = document.getElementById('Reiniciar')
+        sectionReiniciar.style.display = 'block'
     }
 }
 
@@ -137,7 +145,18 @@ function crearMensaje(){
 
 }
 
+function reiniciarJuego(){
+    location.reload()//esta es una funcion de html que vuelve a cargar la página
+}
+
 function iniciarJuego() {
+    //seleccionar a la secció ataque para esconderla
+    let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
+    sectionSeleccionarAtaque.style.display = 'none'
+
+    let sectionReiniciar = document.getElementById('Reiniciar')
+    sectionReiniciar.style.display = 'none'
+
     let botonMascotaJugador = document.getElementById('boton-mascota') 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
@@ -147,6 +166,9 @@ function iniciarJuego() {
     botonAgua.addEventListener('click', ataqueAgua)
     let botonTierra = document.getElementById('boton-tierra')
     botonTierra.addEventListener('click', ataqueTierra)
+
+    let botonReiniciar = document.getElementById('boton-reiniciar')
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 //Carga el documento .html y despues ejecuta la función Iniciar Juego
