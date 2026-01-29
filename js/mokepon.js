@@ -9,7 +9,7 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = 'none'
 
     let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
-    sectionSeleccionarAtaque.style.display = 'block'
+    sectionSeleccionarAtaque.style.display = 'flex'
 
     let seleccion;
     if(document.getElementById('Hipodoge').checked == true){
@@ -86,7 +86,7 @@ function revisarVidas(){
     if(vidasEnemigo == 0 || vidasJugador == 0){
         finalizarJuego()
         let sectionReiniciar = document.getElementById('Reiniciar')
-        sectionReiniciar.style.display = 'block'
+        sectionReiniciar.style.display = 'flex'
     }
 }
 
@@ -95,16 +95,13 @@ function finalizarJuego(){
     document.getElementById('boton-agua').disabled = true
     document.getElementById('boton-tierra').disabled = true
 
-    let sectionMensajes = document.getElementById('mensajes')
-    let parrafo = document.createElement('p')
+    let sectionMensajes = document.getElementById('resultado')
 
     if (vidasEnemigo == 0){
-        parrafo.innerHTML = '🎉 Ganaste la partida completa'
+        sectionMensajes.innerHTML = '🎉 Ganaste la partida completa'
     }else{
-        parrafo.innerHTML = '💀 Perdiste la partida completa'
+        sectionMensajes.innerHTML = '💀 Perdiste la partida completa'
     }
-
-    sectionMensajes.appendChild(parrafo)
 }
 
 function combate(){
@@ -135,13 +132,22 @@ function combate(){
 function crearMensaje(){
     combate()
 
-    let sectionMensajes = document.getElementById('mensajes')
-    let parrafo = document.createElement('p')
-    parrafo.innerHTML = 'Tu mascota atacó con ' + ataqueJugador + ', la mascota del enemigo atacó con ' + ataqueEnemigo + ' ---> ' + resultado
+    let sectionMensajes = document.getElementById('resultado')
+    let ataquesDelJugador = document.getElementById('ataques-del-jugador')
+    let atquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 
-    sectionMensajes.appendChild(parrafo)
+    let nuevoAtaqueDelJugador = document.createElement('p')
+    let nuevoAtaqueDelEnemigo = document.createElement('p')
+
+    //sectionMensajes.innerHTML = resultado
+    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+
+    ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
+    atquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 
     revisarVidas()
+    sectionMensajes.innerHTML = resultado
 
 }
 
@@ -150,7 +156,7 @@ function reiniciarJuego(){
 }
 
 function iniciarJuego() {
-    //seleccionar a la secció ataque para esconderla
+    //seleccionar a la sección ataque para esconderla
     let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
     sectionSeleccionarAtaque.style.display = 'none'
 
